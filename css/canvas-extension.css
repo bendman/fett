@@ -1,0 +1,25 @@
+/**
+ * Canvas Extensions are styles for showing items in the styleguide,
+ * so they can work outside the context of the app.
+ */
+body {
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+}
+.icon-preview {
+	text-align: center;
+}
+.icon-preview [class^="icon-"],
+.icon-preview [class*=" icon-"] {
+	margin: 0.5em 0.25em;
+	display: inline-block;
+}
+
+.icon-preview [class^="icon-"]:not(.icon-circle),
+.icon-preview [class*=" icon-"]:not(.icon-circle) {
+	font-size: 2em;
+}
+h1, h2, h3, h4, h5 {
+	display: block;
+	float: none;
+}

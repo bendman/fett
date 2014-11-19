@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Fett</title>
+
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,800,300' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="vendor/normalize.css">
+	<link rel="stylesheet" href="vendor/prism.css">
+
+	<link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+	<header>
+		<h1>Fett</h1>
+		<!-- <nav> takes care of itself, based on <section/article> tags and their <h1> tags -->
+	</header>
+	<main>
+
+		<aside class="intro">
+			<!-- 
+				If you are actually including your site logo,
+				it is best to directly point to the image with
+				a relative URL.
+				
+				<img src="../../src/images/logo.svg" alt="Site Logo">
+			-->
+
+			<p>This is an example styleguide using Fett, a lightweight styleguide renderer in Javascript. It also serves as the styleguide for <a href="http://benduncan.me">my digital resume</a>.  Theoretically your own logo would be here, but I'll throw the Fett logo on here as an example.</p>
+		</aside>
+
+		<section>
+			<h1>Styles</h1>
+
+			<article>
+				<h1>Color</h1>
+				
+				<p>These are the primary site accent colors, following a monochromatic color scheme for simplicity.</p>
+
+				<div>
+					<figure class="swatch">
+						<figcaption>
+							<em>Powder Blue</em>
+							<code class="color">#E0EFF1</code>
+						</figcaption>
+					</figure>
+					<figure class="swatch">
+						<figcaption>
+							<em>Gulf Blue</em>
+							<code class="color">#7DB4B5</code>
+						</figcaption>
+					</figure>
+				</div>
+
+				<p>Neutrals like these can be used for most body copy, as they are more readable but draw less attention than accent colors above.</p>
+
+				<div>
+					<figure class="swatch">
+						<figcaption>
+							<em>Light Gray</em>
+							<code class="color">#CCCCCC</code>
+						</figcaption>
+					</figure>
+					<figure class="swatch">
+						<figcaption>
+							<em>Medium Gray</em>
+							<code class="color">#444444</code>
+						</figcaption>
+					</figure>
+					<figure class="swatch">
+						<figcaption>
+							<em>Dark Gray</em>
+							<code class="color">#222222</code>
+						</figcaption>
+					</figure>
+				</div>
+			</article>
+
+			<article class="alternate">
+				<h1>Typography</h1>
+
+				<p>The typeface used is Helvetica Neue.</p>
+
+				<code data-language="html" class="preview canvas-bg">
+					<h1>h1. Main Title</h1>
+					<h2>h2. Sub Title</h2>
+					<h3>h3. Section Title</h3>
+					<h4>h4. Content Title</h4>
+					<h5>h5. Content Subtitle</h5>
+
+					<p>Body text lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque iusto placeat voluptatum nemo, porro ab ut voluptate eos! Obcaecati quam unde optio fuga non quas eligendi officiis id voluptatem fugit.</p>
+				</code>
+			</article>
+
+		</section>
+
+		<section>
+			<h1>Components</h1>
+
+			<article class="alternate">
+				<h1>Skills</h1>
+
+				<code data-language="html" class="preview">
+					<div class="skills">
+						<div>
+							<h4>Group Title</h4>
+							<dl>
+								<dt>Subgroup</dt>
+								<dd>Skill Item</dd>
+								<dd>Another Item</dd>
+							</dl>
+						</div>
+						<div>
+							<h4>Group Title</h4>
+							<dl>
+								<dt>Another Subgroup</dt>
+								<dd>With Skills</dd>
+								<dt>Subgroup</dt>
+								<dd>Skill Item</dd>
+							</dl>
+						</div>
+						<div>
+							<h4>Group Title</h4>
+							<dl>
+								<dt>Subgroup</dt>
+								<dd>Skill Item</dd>
+							</dl>
+						</div>
+					</div>
+				</code>
+			</article>
+
+			<article>
+				<h1>Project</h1>
+
+				<code data-language="html" class="preview canvas-bg">
+					<div class="experience"> <!-- section wrapper -->
+						<article class="project">
+							<header>
+								<h4>Company</h4>
+								<h5>Project Title</h5>
+								<span>Start Date - End Date</span>
+							</header>
+							<p>Summary lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate repellendus non, nobis commodi cumque aut quibusdam? Nulla saepe provident perferendis, aperiam culpa quisquam quos expedita itaque qui suscipit. Laboriosam, vitae.</p>
+						</article>
+					</div>
+				</code>
+
+			</article>
+
+		</section>
+
+	</main>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="vendor/prism.js"></script>
+	<script src="vendor/beautify-js.js"></script>
+	<script src="vendor/beautify-html.js"></script>
+	<script src="js/fett.js"></script>
+</body>
+</html>

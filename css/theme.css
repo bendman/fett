@@ -1,0 +1,251 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	font-family: 'Open Sans', sans-serif;
+	background: #F0F0F0;
+	color: #111;
+	margin-top: 3rem;
+}
+main {
+
+	text-align: center;
+}
+.hidden {
+	display: none;
+}
+
+/**
+ * Primary Heading
+ */
+header {
+	background: #012845;
+	color: #FFF;
+	overflow: visible;
+	padding: 0 0.5rem;
+	position: fixed;
+	height: 3rem;
+	margin-top: -3rem;
+	z-index: 2;
+	width: 100%;
+	box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.5);
+}
+	header h1,
+	header h2 {
+		display: inline-block;
+		font-size: 2rem;
+		padding: 0;
+	}
+	header a {
+		color: #FFF;
+		text-decoration: none;
+		display: inline-block;
+		line-height: 3;
+		padding: 0 0.5em;
+	}
+		.topnav > li:hover > a {
+			background-color: #66C9D5;
+			color: #fff;
+		}
+		.topnav > .active > a {
+			background-color: #1378B7;
+			color: #fff;
+		}
+	header nav {
+		float: right;
+	}
+	header ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	header li {
+		display: inline-block;
+	}
+	.subnav {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		height: 3em;
+		background: #fff;
+		text-align: right;
+		font-size: .9em;
+		display: none;
+		border-top: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
+	}
+		.subnav a {
+			color: #1378B7;
+		}
+		.subnav .active > a {
+			color: #000;
+		}
+	header li:hover > .subnav {
+		display: block;
+	}
+		header li:hover > a {
+			color: #000;
+		}
+	.subnav li {
+		padding: 0 1em;
+	}
+
+/**
+ * Base Headings and Typography
+ */
+h1 {
+	font-size: 3rem;
+	margin: 0;
+	padding-top: 1em;
+}
+article h1 {
+	margin: 0 0 2rem;
+}
+article article h1 {
+	font-weight: normal;
+	font-size: 2rem;
+	margin-bottom: 0.5rem;
+}
+article article article h1 {
+	font-weight: lighter;
+	font-size: 1.4rem;
+}
+p {
+	max-width: 40em;
+	margin-left: auto;
+	margin-right: auto;
+}
+a {
+	color: #293F54;
+}
+a:hover {
+	color: #000;
+}
+.frame-wrapper {
+	width: 100%;
+}
+	iframe {
+		width: 100%;
+		border: none;
+		background: #fff;
+		height: 0px;
+	}
+		iframe.no-bg {
+			background: none;
+		}
+section > h1 {
+	background: #152732;
+	color: #fff;
+	font-size: 6rem;
+	padding: 8rem 0;
+}
+
+/**
+ * Article blocks and centering
+ */
+.intro {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+.intro img {
+	width: 100%;
+	margin: 2rem auto;
+}
+.intro p {
+	font-size: 1.6em;
+	font-weight: 300;
+}
+article {
+	padding-bottom: 2rem;
+}
+.intro,
+section > article {
+	padding-right: 14rem;
+	padding-left: 14rem;
+}
+@media only screen and (max-device-width: 1024px), only screen and (max-width: 1024px) {
+	.intro,
+	section > article {
+		padding-right: 10rem;
+		padding-left: 10rem;
+	}
+}
+@media only screen and (max-device-width: 768px), only screen and (max-width: 768px) {
+	.intro,
+	section > article {
+		padding-right: 1rem;
+		padding-left: 1rem;
+	}
+	.frame-wrapper {
+		width: auto;
+		margin-left: -1rem;
+		margin-right: -1rem;
+	}
+}
+
+/**
+ * Alternate (darker) sections
+ */
+.alternate {
+	background: #283F5F;
+	color: #d0eff7;
+}
+	.alternate h1,
+	.alternate h2 {
+		color: #fff;
+	}
+	.alternate p {
+		font-weight: 300;
+	}
+	.alternate a {
+		color: #66C9D5;
+	}
+	.alternate a:hover {
+		color: #fff;
+	}
+
+/**
+ * Color Swatches
+ */
+.swatch {
+	display: inline-block;
+	position: relative;
+	text-align: center;
+	width: 7rem;
+	padding: 0.5rem;
+	margin: 0;
+}
+	.swatch .preview {
+		height: 5rem;
+		width: 100%;
+		border-radius: 5px 5px 0 0;
+		box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.2);
+	}
+	.swatch figcaption {
+		background: #fff;
+		color: #555;
+		border-radius: 0 0 5px 5px;
+		padding: 0.5rem 0;
+		border: 1px solid #DEDEDE;
+		border-top: none;
+	}
+	.swatch .color, .swatch em {
+		text-transform: uppercase;
+	}
+	.swatch em {
+		display: block;
+		font-size: 0.7em;
+		white-space: nowrap;
+		overflow: hidden;
+		width: 100%;
+		text-overflow: ellipsis;
+		font-style: normal;
+	}
+	.swatch pre,
+	.swatch code {
+		display: block;
+		margin: 0;
+		width: 100%;
+		font-size: 0.8rem;
+	}
