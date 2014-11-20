@@ -32,9 +32,14 @@ header {
 }
 	header h1,
 	header h2 {
-		display: inline-block;
+		float: left;
 		font-size: 2rem;
 		padding: 0;
+	}
+	header img {
+		float: left;
+		height: 2rem;
+		margin: 0.5rem 0.5rem 0 0;
 	}
 	header a {
 		color: #FFF;
@@ -151,6 +156,7 @@ section > h1 {
 .intro img {
 	width: 100%;
 	margin: 2rem auto;
+	max-width: 30rem;
 }
 .intro p {
 	font-size: 1.6em;
