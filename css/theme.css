@@ -4,7 +4,7 @@
 body {
 	font-family: 'Open Sans', sans-serif;
 	background: #F0F0F0;
-	color: #111;
+	color: #222;
 	margin-top: 3rem;
 }
 main {
@@ -19,7 +19,7 @@ main {
  * Primary Heading
  */
 header {
-	background: #012845;
+	background: #012345;
 	color: #FFF;
 	overflow: visible;
 	padding: 0 0.5rem;
@@ -84,13 +84,13 @@ header {
 			color: #1378B7;
 		}
 		.subnav .active > a {
-			color: #000;
+			color: #222;
 		}
 	header li:hover > .subnav {
 		display: block;
 	}
 		header li:hover > a {
-			color: #000;
+			color: #222;
 		}
 	.subnav li {
 		padding: 0 1em;
@@ -194,7 +194,7 @@ section > article {
  * Alternate (darker) sections
  */
 .alternate {
-	background: #283F5F;
+	background: #315d72;
 	color: #d0eff7;
 }
 	.alternate h1,
@@ -233,7 +233,7 @@ section > article {
 		color: #555;
 		border-radius: 0 0 5px 5px;
 		padding: 0.5rem 0;
-		border: 1px solid #DEDEDE;
+		border: 1px solid #DDD;
 		border-top: none;
 	}
 	.swatch .color, .swatch em {
