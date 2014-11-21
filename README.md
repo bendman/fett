@@ -1,3 +1,4 @@
+<img src="http://benduncan.me/experiments/fett/fett-helmet.svg" alt="Fett Logo" width="300">
 # Fett
 
 A lightweight pattern library for HTML, CSS, and brand styles.
