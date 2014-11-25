@@ -16,6 +16,25 @@
 		// Syntax highlighting and indentation for visible code
 		var visibleCode = Array.prototype.filter.call(codeBlocks, notHidden);
 		Array.prototype.forEach.call(visibleCode, presentCode);
+
+		var colorSwatches = document.querySelectorAll('.swatch');
+		Array.prototype.forEach.call(colorSwatches, renderColorSwatches);
+	}
+
+	// 
+	// # Color Swatches
+	//
+	
+	function renderColorSwatches(swatchNode) {
+		// Create the color preview element
+		var colorPreview = document.createElement('div');
+		colorPreview.classList.add('color-preview');
+
+		// Set the color preview to color code provided in `.color`
+		colorPreview.style.backgroundColor = swatchNode.querySelector('.color').textContent;
+
+		// Insert the color preview
+		swatchNode.insertBefore(colorPreview, swatchNode.firstChild);
 	}
 
 	// 
@@ -45,14 +64,14 @@
 	function injectFrameExample(iframe, exampleHTML) {
 		var frameBody = iframe.contentWindow.document.body;
 
-		// set content height to auto, so the example will stretch
+		// Set content height to auto, so the example will stretch
 		frameBody.style.height = 'auto';
 		frameBody.parentElement.style.height = 'auto';
 
-		// inject example code
+		// Inject the example code
 		frameBody.innerHTML = exampleHTML;
 
-		// set iframe height to match body content
+		// Set the iframe height to match body content
 		iframe.style.height = frameBody.scrollHeight + 'px';
 	}
 
@@ -71,7 +90,7 @@
 		// sanatizes HTML to entities in a text node for presentation.
 		codeEl.textContent = html_beautify(codeEl.innerHTML).trim();
 
-		// highlight each element
+		// Highlight each element
 		Prism.highlightElement(codeEl);
 	}
 
