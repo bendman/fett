@@ -17,8 +17,12 @@
 		var visibleCode = Array.prototype.filter.call(codeBlocks, notHidden);
 		Array.prototype.forEach.call(visibleCode, presentCode);
 
+		// Create previews for color swatches
 		var colorSwatches = document.querySelectorAll('.swatch');
 		Array.prototype.forEach.call(colorSwatches, renderColorSwatches);
+
+		// Page navigation
+		buildNavigation();
 	}
 
 	// 
@@ -57,7 +61,7 @@
 		iframe.addEventListener('load', injectFrameExample.bind(window, iframe, codeEl.innerHTML));
 
 		// Attach the frame before the target source code, or the wrapping `<pre>`
-		var tgt = isTag(codeEl.parentElement, 'pre') ? codeEl.parentElement : codeEl;
+		var tgt = isTag('pre', codeEl.parentElement) ? codeEl.parentElement : codeEl;
 		tgt.parentElement.insertBefore(frameWrapper, tgt);
 	}
 
@@ -81,7 +85,7 @@
 
 	function presentCode(codeEl) {
 		// Remove exterior indentation (from `pre` tag)
-		if (isTag(codeEl.parentNode, 'pre')) {
+		if (isTag('pre', codeEl.parentNode)) {
 			removeEmptyText(codeEl.previousSibling);
 			removeEmptyText(codeEl.nextSibling);
 		}
@@ -101,6 +105,27 @@
 		}
 	}
 
+	// 
+	// # Navigation
+	// 
+
+	function buildNavigation() {
+		// Get a list of all defined headings.
+		var headings = document.getElementsByTagName('main')[0]
+			.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+		// Get the nearest `section` or `article` tags above those headings.
+		var sections = Array.prototype.map.call(headings, function(heading){
+			return closest(function(node){
+				return isTag('section', node) || isTag('article', node);
+			}, heading);
+		});
+
+		// Filter for unique sections in case of duplicate headings.
+		sections = Array.prototype.filter.call(sections, isUnique);
+
+	}
+
 
 	// 
 	// # Filters
@@ -108,7 +133,7 @@
 
 	// Crawl up the tree from `node`, returning the closest element which
 	// matches the `test`, or `null` if no match is found.
-	function closest(node, test) {
+	function closest(test, node) {
 		while ((node = node.parentElement)) {
 			if (test(node)) return node;
 		}
@@ -118,17 +143,17 @@
 	// Verify that a `node` is not contained in a code block.
 	// This is particularly useful to prevent processing of example code.
 	function notExampleCode(node) {
-		return !closest(node, function(node){
-			return isTag(node, 'code');
-		});
+		return !closest(function(node){
+			return isTag('code', node);
+		}, node);
 	}
 
 	// Verify that an element isn't hidden by crawling up the DOM
 	// looking for `.hidden` elements.
 	function notHidden(node) {
-		return !closest(node, function(node){
+		return !closest(function(node){
 			return node.classList.contains('hidden');
-		});
+		}, node);
 	}
 
 	// Filter a list of `nodes` for only those *not* included in code blocks.
@@ -138,13 +163,18 @@
 
 	// Filter a list to only include `.example` elements.
 	function isExample(node) {
-		return !!closest(node, function(node){
+		return !!closest(function(node){
 			return node.classList.contains('example');
-		});
+		}, node);
+	}
+
+	// Filter for unique values in an array.
+	function isUnique(item, index, array) {
+		return array.indexOf(item) === index;
 	}
 
 	// Test if a node is a certain tag
-	function isTag(node, tag) {
+	function isTag(tag, node) {
 		return node.tagName.toLowerCase() === tag;
 	}
 
