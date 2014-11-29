@@ -110,26 +110,102 @@
 	// 
 
 	function buildNavigation() {
+
 		// Get a list of all defined headings.
 		var headings = document.getElementsByTagName('main')[0]
 			.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
-		// Get the nearest `section` or `article` tags above those headings.
-		var sections = Array.prototype.map.call(headings, function(heading){
-			return closest(function(node){
-				return isTag('section', node) || isTag('article', node);
-			}, heading);
+		// Build objects to store the heading and the associated section.
+		var navList = Array.prototype.map.call(headings, buildNavObjects);
+		attachNavParent(navList);
+
+		console.log(navList);
+		var navEl = document.createElement('nav');
+		buildNavElements(undefined, navList, navEl);
+		document.querySelector('header').appendChild(navEl);
+	}
+
+	// Build objects to store navigation information from headings
+	function buildNavObjects(heading) {
+		return {
+			heading: heading,
+			title: heading.textContent,
+			// Get the nearest `section` or `article` tags above those headings.
+			section: closest(isNavSection, heading),
+			parent: null
+		};
+	}
+
+	// Attach parent properties to each nav section.
+	function attachNavParent(navList) {		
+		// Store an array of the registered navigable sections to search later.
+		var sections = navList.map(function(obj){
+			return obj.section;
 		});
 
-		// Filter for unique sections in case of duplicate headings.
-		sections = Array.prototype.filter.call(sections, isUnique);
+		// Build a hierarchy by registering child sections with their parent.
+		navList.forEach(function(obj){
+			// Get the closest element which is also a nav section.
+			var parentNavSection = closest(function(parent){
+				return sections.indexOf(parent) !== -1;
+			}, obj.section);
 
+			// Find the matching navList object for the parent nav section.
+			var parentObj = navList.filter(function(navItem){
+				return navItem.section === parentNavSection;
+			})[0];
+
+			obj.parent = parentObj;
+		});
+	}
+
+	// Attach a `ul` node of links to the `navEl` parent.
+	function buildNavElements(parent, navList, navEl) {
+		// Find children by matching the parent.
+		var items = navList.filter(function(navItem){
+			return navItem.parent === parent;
+		});
+		if (!items.length) return false;
+
+		// Build the children navigation.
+		var ulEl = document.createElement('ul');
+		items.forEach(function(item){
+			var liEl = document.createElement('li');
+			var aEl = document.createElement('a');
+			aEl.textContent = item.title;
+
+			// Handle the item ID for links
+			var id = idFromText(item.title);
+			aEl.setAttribute('href', '#' + id);
+			item.section.id = id;
+
+			liEl.appendChild(aEl);
+
+			// Recurse to build each sub-child navigation.
+			buildNavElements(item, navList, liEl);
+			ulEl.appendChild(liEl);
+		});
+
+		navEl.appendChild(ulEl);
 	}
 
 
 	// 
-	// # Filters
-	// 
+	// # Utlities
+	//
+	
+	function idFromText(text) {
+		var words = text.split(/\s+/);
+		words = words.map(function(word){
+			return word[0].toUpperCase() + word.slice(1);
+		});
+
+		return words.join('_');
+	}
+	
+	function isNavSection(node) {
+		return isTag('section', node) || isTag('article', node);
+	}
 
 	// Crawl up the tree from `node`, returning the closest element which
 	// matches the `test`, or `null` if no match is found.
@@ -169,8 +245,8 @@
 	}
 
 	// Filter for unique values in an array.
-	function isUnique(item, index, array) {
-		return array.indexOf(item) === index;
+	function isUnique(item, i, array) {
+		return array.indexOf(item) === i;
 	}
 
 	// Test if a node is a certain tag
