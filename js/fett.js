@@ -259,11 +259,6 @@
 		}, node);
 	}
 
-	// Filter for unique values in an array.
-	function isUnique(item, i, array) {
-		return array.indexOf(item) === i;
-	}
-
 	// Test if a node is a certain tag
 	function isTag(tag, node) {
 		return node.tagName.toLowerCase() === tag;
