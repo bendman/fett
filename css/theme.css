@@ -48,11 +48,11 @@ header {
 		line-height: 3;
 		padding: 0 0.5em;
 	}
-		.topnav > li:hover > a {
+		nav > ul > li:hover > a {
 			background-color: #66C9D5;
 			color: #fff;
 		}
-		.topnav > .active > a {
+		nav > ul > .active > a {
 			background-color: #1378B7;
 			color: #fff;
 		}
@@ -67,7 +67,7 @@ header {
 	header li {
 		display: inline-block;
 	}
-	.subnav {
+	nav li ul {
 		position: absolute;
 		left: 0;
 		right: 0;
@@ -80,19 +80,19 @@ header {
 		border-top: 1px solid #ddd;
 		border-bottom: 1px solid #ddd;
 	}
-		.subnav a {
+		nav li ul a {
 			color: #1378B7;
 		}
-		.subnav .active > a {
+		nav li li.active > a {
 			color: #222;
 		}
-	header li:hover > .subnav {
+	header li:hover > ul {
 		display: block;
 	}
 		header li:hover > a {
 			color: #222;
 		}
-	.subnav li {
+	nav li li {
 		padding: 0 1em;
 	}
 
@@ -222,7 +222,7 @@ section > article {
 	padding: 0.5rem;
 	margin: 0;
 }
-	.swatch .preview {
+	.swatch .color-preview {
 		height: 5rem;
 		width: 100%;
 		border-radius: 5px 5px 0 0;
