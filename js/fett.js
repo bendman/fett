@@ -117,9 +117,21 @@
 
 		// Build objects to store the heading and the associated section.
 		var navList = Array.prototype.map.call(headings, buildNavObjects);
+		// Filter for unique sections.
+		var sections = [];
+		navList = navList.filter(function(navItem){
+			if (sections.indexOf(navItem.section) !== -1) {
+				// Section is already registered to a navItem, so remove.
+				return false;
+			}
+			// Section is the first registered instance, so keep.
+			sections.push(navItem.section);
+			return true;
+		});
+		// Get parents so we can build a navigation tree.
 		attachNavParent(navList);
 
-		console.log(navList);
+		// Build the navigation elements for the UI.
 		var navEl = document.createElement('nav');
 		buildNavElements(undefined, navList, navEl);
 		document.querySelector('header').appendChild(navEl);
@@ -194,6 +206,8 @@
 	// # Utlities
 	//
 	
+
+	// Generate a valid ID from a string of text.
 	function idFromText(text) {
 		var words = text.split(/\s+/);
 		words = words.map(function(word){
@@ -203,6 +217,7 @@
 		return words.join('_');
 	}
 	
+	// Check if a node is a navigation delimiting section.
 	function isNavSection(node) {
 		return isTag('section', node) || isTag('article', node);
 	}
