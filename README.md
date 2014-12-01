@@ -1,5 +1,6 @@
 <img src="http://benduncan.me/experiments/fett/fett-helmet.svg" alt="Fett Logo" width="300">
 # Fett
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/bendman/fett?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A lightweight pattern library for HTML, CSS, and brand styles.
 
