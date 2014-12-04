@@ -44,6 +44,7 @@
 	// 
 	// # Example Iframes
 	// 
+	var frameExamples = [];
 
 	// Handle 
 	function renderExample(codeEl) {
@@ -58,26 +59,39 @@
 		frameWrapper.appendChild(iframe);
 
 		// Save copy of code and append to frame when loaded
-		iframe.addEventListener('load', injectFrameExample.bind(window, iframe, codeEl.innerHTML));
+		frameExamples.push({
+			node: iframe,
+			exampleContent: codeEl.innerHTML
+		});
 
 		// Attach the frame before the target source code, or the wrapping `<pre>`
 		var tgt = isTag('pre', codeEl.parentElement) ? codeEl.parentElement : codeEl;
 		tgt.parentElement.insertBefore(frameWrapper, tgt);
 	}
 
-	function injectFrameExample(iframe, exampleHTML) {
-		var frameBody = iframe.contentWindow.document.body;
+	// Function to be called from iframe content to verify it is ready.
+	window.exampleReady = function(contentWindow) {
+		// Find the matching frame example to get the proper content.
+		var frameExample = frameExamples.filter(function(frameExample){
+			if (frameExample.node.contentWindow === contentWindow) return true;
+		})[0];
 
+		if (!frameExample) {
+			return;
+		}
+
+		var frameBody = contentWindow.document.body;
+
+		// Inject the example code
+		frameBody.innerHTML = frameExample.exampleContent;
+	
 		// Set content height to auto, so the example will stretch
 		frameBody.style.height = 'auto';
 		frameBody.parentElement.style.height = 'auto';
 
-		// Inject the example code
-		frameBody.innerHTML = exampleHTML;
-
 		// Set the iframe height to match body content
-		iframe.style.height = frameBody.scrollHeight + 'px';
-	}
+		frameExample.node.style.height = contentWindow.document.body.scrollHeight + 'px';
+	};
 
 	// 
 	// # Code Handling
