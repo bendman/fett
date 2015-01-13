@@ -21,8 +21,25 @@
 		var colorSwatches = document.querySelectorAll('.swatch');
 		Array.prototype.forEach.call(colorSwatches, renderColorSwatches);
 
+		// Bind Page Events
+		bindEvents();
+
 		// Page navigation
 		buildNavigation();
+	}
+
+	// 
+	// # Events
+	// 
+
+	function bindEvents() {
+		// custom debounced resize event
+		window.addEventListener('resize', debounce(triggerResize, 250));
+
+	}
+	function triggerResize(e) {
+		var event = new CustomEvent('resize-debounced');
+		window.dispatchEvent(event);
 	}
 
 	// 
@@ -89,8 +106,15 @@
 		frameBody.style.height = 'auto';
 		frameBody.parentElement.style.height = 'auto';
 
-		// Set the iframe height to match body content
-		frameExample.node.style.height = contentWindow.document.body.scrollHeight + 'px';
+		resize();
+		window.addEventListener('resize-debounced', resize);
+
+		function resize() {
+			// Reset frame height for measuring
+			frameExample.node.style.height = 'auto';
+			// Set the iframe height to match body content
+			frameExample.node.style.height = contentWindow.document.body.scrollHeight + 'px';
+		}
 	};
 
 	// 
@@ -276,6 +300,23 @@
 	// Test if a node is a certain tag
 	function isTag(tag, node) {
 		return node.tagName.toLowerCase() === tag;
+	}
+
+	// Return a debounced function that will be triggered
+	// once at the end of a series of calls within `wait` milliseconds
+	function debounce(fn, wait) {
+		var timeout;
+		return function(){
+			var context = this;
+			var futureArgs = arguments;
+
+			function futureCall() {
+				fn.apply(context, futureArgs);
+			}
+
+			window.clearTimeout(timeout);
+			timeout = window.setTimeout(futureCall, wait);
+		};
 	}
 
 
