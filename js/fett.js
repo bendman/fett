@@ -123,6 +123,7 @@
 
 	function presentCode(codeEl) {
 		// Remove exterior indentation (from `pre` tag)
+console.log('presentCode', codeEl);
 		if (isTag('pre', codeEl.parentNode)) {
 			removeEmptyText(codeEl.previousSibling);
 			removeEmptyText(codeEl.nextSibling);
@@ -130,7 +131,11 @@
 
 		// `html_beautify` indents content, while assigning to textContent
 		// sanatizes HTML to entities in a text node for presentation.
-		codeEl.textContent = html_beautify(codeEl.innerHTML).trim();
+		if (codeEl.parentNode.classList.contains('language-markup')) {
+			codeEl.textContent = html_beautify(codeEl.innerHTML).trim();
+		} else if (codeEl.parentNode.classList.contains('language-javascript')) {
+			codeEl.textContent = js_beautify(codeEl.innerHTML).trim();
+		}
 
 		// Highlight each element
 		Prism.highlightElement(codeEl);
