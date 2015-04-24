@@ -9,9 +9,26 @@
 		var codeBlocks = document.getElementsByTagName('code');
 		codeBlocks = excludeExampleCode(codeBlocks);
 
+
 		// Example generation for `.example` code blocks
 		var exampleCode = Array.prototype.filter.call(codeBlocks, isExample);
 		Array.prototype.forEach.call(exampleCode, renderExample);
+
+		// Find how many examples to ultimately make
+		// var examples = [];
+		// Array.prototype.forEach.call(exampleCode, function(codeEl){
+		// 	var wrapper = closest(isNavSection, codeEl);
+		// 	var exampleIndex = indexByProp(examples, 'wrapper', wrapper);
+		// 	if (exampleIndex === -1) {
+		// 		examples.push({
+		// 			wrapper: wrapper,
+		// 			codeEls: [codeEl]
+		// 		});
+		// 	} else {
+		// 		examples[exampleIndex].codeEls.push(codeEl);
+		// 	}
+		// });
+		// examples.forEach(renderExample2);
 
 		// Syntax highlighting and indentation for visible code
 		var visibleCode = Array.prototype.filter.call(codeBlocks, notHidden);
@@ -65,55 +82,108 @@
 
 	// Handle 
 	function renderExample(codeEl) {
-		// Create the frame wrapping element
-		var frameWrapper = document.createElement('div');
-		frameWrapper.classList.add('frame-wrapper');
+		var wrapper = closest(isNavSection, codeEl);
+		var exampleIndex = indexByProp(frameExamples, 'wrapper', wrapper);
 
-		// Create the frame itself
-		var iframe = document.createElement('iframe');
-		iframe.setAttribute('src', 'canvas.html');
-		iframe.style.height = '0px';
-		frameWrapper.appendChild(iframe);
+		if (exampleIndex === -1) {
 
-		// Save copy of code and append to frame when loaded
-		frameExamples.push({
-			node: iframe,
-			exampleContent: codeEl.innerHTML
-		});
+			// Create the frame wrapping element
+			var frameWrapper = document.createElement('div');
+			frameWrapper.classList.add('frame-wrapper');
 
-		// Attach the frame before the target source code, or the wrapping `<pre>`
-		var tgt = isTag('pre', codeEl.parentElement) ? codeEl.parentElement : codeEl;
-		tgt.parentElement.insertBefore(frameWrapper, tgt);
+			// Create the frame itself
+			var iframe = document.createElement('iframe');
+			iframe.setAttribute('src', 'canvas.html');
+			iframe.style.height = '0px';
+			frameWrapper.appendChild(iframe);
+			
+			// Add a new example and update the index
+			exampleIndex = frameExamples.length;
+			frameExamples.push({
+				node: iframe,
+				wrapper: wrapper,
+				sources: []
+			});
+
+			// Attach the frame before the target source code, or the wrapping `<pre>`
+			var tgt = isTag('pre', codeEl.parentElement) ? codeEl.parentElement : codeEl;
+			tgt.parentElement.insertBefore(frameWrapper, tgt);
+		}
+
+		var language;
+		if (codeEl.parentNode.classList.contains('language-markup')) {
+			language = 'markup';
+		} else if (codeEl.parentNode.classList.contains('language-javascript')) {
+			language = 'javascript';
+		} else {
+			// no language match
+			return;
+		}
+
+		if (language) {
+			// Save copy of code and append to frame when loaded
+			frameExamples[exampleIndex].sources.push({
+				language: language,
+				content: codeEl.innerHTML
+			});
+		}
 	}
+	// function renderExample2(example) {
+	// 	// Create the frame wrapping element
+	// 	var frameWrapper = document.createElement('div');
+	// 	frameWrapper.classList.add('frame-wrapper');
+
+	// 	// Create the frame itself
+	// 	var iframe = document.createElement('iframe');
+	// 	iframe.setAttribute('src', 'canvas.html');
+	// 	iframe.style.height = '0px';
+	// 	frameWrapper.appendChild(iframe);
+	// }
 
 	// Function to be called from iframe content to verify it is ready.
 	window.exampleReady = function(contentWindow) {
 		// Find the matching frame example to get the proper content.
-		var frameExample = frameExamples.filter(function(frameExample){
-			if (frameExample.node.contentWindow === contentWindow) return true;
+		var example = frameExamples.filter(function(example){
+			if (example.node.contentWindow === contentWindow) return true;
 		})[0];
 
-		if (!frameExample) {
+		if (!example) {
 			return;
 		}
 
-		var frameBody = contentWindow.document.body;
+		example.nodeBody = contentWindow.document.body;
+		example.sources.forEach(function(source){
+			sourceHandlers[source.language](example, source.content);
+		});
 
-		// Inject the example code
-		frameBody.innerHTML = frameExample.exampleContent;
+		// Inject the example code.
+		// example.nodeBody.innerHTML = example.exampleContent;
 	
-		// Set content height to auto, so the example will stretch
-		frameBody.style.height = 'auto';
-		frameBody.parentElement.style.height = 'auto';
+		// Set content height to auto, so the example will stretch.
+		example.nodeBody.style.height = 'auto';
+		example.nodeBody.parentElement.style.height = 'auto';
 
 		resize();
 		window.addEventListener('resize-debounced', resize);
 
 		function resize() {
-			// Reset frame height for measuring
-			frameExample.node.style.height = 'auto';
-			// Set the iframe height to match body content
-			frameExample.node.style.height = contentWindow.document.body.scrollHeight + 'px';
+			// Reset frame height for measuring.
+			example.node.style.height = 'auto';
+			// Set the iframe height to match body content.
+			example.node.style.height = contentWindow.document.body.scrollHeight + 'px';
+		}
+	};
+
+	var sourceHandlers = {
+		markup: function(example, source) {
+			// Add markup to an example
+			example.nodeBody.innerHTML += source;
+		},
+		javascript: function(example, source) {
+			// Add javascript to an example
+			var script = example.node.contentWindow.document.createElement('script');
+			script.innerHTML = source;
+			example.nodeBody.appendChild(script);
 		}
 	};
 
@@ -123,7 +193,6 @@
 
 	function presentCode(codeEl) {
 		// Remove exterior indentation (from `pre` tag)
-console.log('presentCode', codeEl);
 		if (isTag('pre', codeEl.parentNode)) {
 			removeEmptyText(codeEl.previousSibling);
 			removeEmptyText(codeEl.nextSibling);
@@ -305,6 +374,19 @@ console.log('presentCode', codeEl);
 	// Test if a node is a certain tag
 	function isTag(tag, node) {
 		return node.tagName.toLowerCase() === tag;
+	}
+
+	function indexByProp(array, prop, val) {
+		var matches = array.filter(function(item){
+			if (typeof item === 'object' && item[prop] === val) {
+				return true;
+			} else return false;
+		});
+		if (matches && matches.length) {
+			return array.indexOf(matches[0]);
+		} else {
+			return -1;
+		}
 	}
 
 	// Return a debounced function that will be triggered

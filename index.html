@@ -141,31 +141,32 @@
 
 		</section>
 
-		<section>
-			<h1>Javascript</h1>
-
-			<p>Javascript examples can also be added.</p>
-
-			<pre class="example language-markup">
-				<code>
-					<div id="target"></div>
-				</code>
-			</pre>
-
-			<pre class="example language-javascript">
-				<code>
-					// This is javascript
-					$('#target')
-						.html('this is content')
-						.on('click', function(){
-							alert('hello');
-						});
-				</code>
-			</pre>
-		</section>
 
 		<section>
 			<h1>Components</h1>
+			
+			<article>
+				<h1>Javascript</h1>
+
+				<p>Javascript examples can also be added.</p>
+
+				<pre class="example language-markup">
+					<code>
+						<h3 id="target">Some Old HTML</h3>
+					</code>
+				</pre>
+
+				<pre class="example language-javascript">
+					<code>
+						// This is Javascript
+						var target = document.getElementById('target')
+						target.innerHTML = 'This was put here by Javascript!';
+						target.addEventListener('click', function(){
+							alert('hello');
+						});
+					</code>
+				</pre>
+			</article>
 
 			<article class="alternate">
 				<h1>Skills</h1>
