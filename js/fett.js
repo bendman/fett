@@ -14,22 +14,6 @@
 		var exampleCode = Array.prototype.filter.call(codeBlocks, isExample);
 		Array.prototype.forEach.call(exampleCode, renderExample);
 
-		// Find how many examples to ultimately make
-		// var examples = [];
-		// Array.prototype.forEach.call(exampleCode, function(codeEl){
-		// 	var wrapper = closest(isNavSection, codeEl);
-		// 	var exampleIndex = indexByProp(examples, 'wrapper', wrapper);
-		// 	if (exampleIndex === -1) {
-		// 		examples.push({
-		// 			wrapper: wrapper,
-		// 			codeEls: [codeEl]
-		// 		});
-		// 	} else {
-		// 		examples[exampleIndex].codeEls.push(codeEl);
-		// 	}
-		// });
-		// examples.forEach(renderExample2);
-
 		// Syntax highlighting and indentation for visible code
 		var visibleCode = Array.prototype.filter.call(codeBlocks, notHidden);
 		Array.prototype.forEach.call(visibleCode, presentCode);
@@ -128,20 +112,10 @@
 			});
 		}
 	}
-	// function renderExample2(example) {
-	// 	// Create the frame wrapping element
-	// 	var frameWrapper = document.createElement('div');
-	// 	frameWrapper.classList.add('frame-wrapper');
 
-	// 	// Create the frame itself
-	// 	var iframe = document.createElement('iframe');
-	// 	iframe.setAttribute('src', 'canvas.html');
-	// 	iframe.style.height = '0px';
-	// 	frameWrapper.appendChild(iframe);
-	// }
-
-	// Function to be called from iframe content to verify it is ready.
-	window.exampleReady = function(contentWindow) {
+	// Functions to be called from iframe content to verify it is ready.
+	window.Fett = {};
+	Fett.exampleReady = function exampleReady(contentWindow) {
 		// Find the matching frame example to get the proper content.
 		var example = frameExamples.filter(function(example){
 			if (example.node.contentWindow === contentWindow) return true;
@@ -155,14 +129,14 @@
 		example.sources.forEach(function(source){
 			sourceHandlers[source.language](example, source.content);
 		});
-
-		// Inject the example code.
-		// example.nodeBody.innerHTML = example.exampleContent;
 	
 		// Set content height to auto, so the example will stretch.
 		example.nodeBody.style.height = 'auto';
 		example.nodeBody.parentElement.style.height = 'auto';
 
+		contentWindow.Fett = {
+			resize: resize
+		};
 		resize();
 		window.addEventListener('resize-debounced', resize);
 

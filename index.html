@@ -144,7 +144,7 @@
 
 		<section>
 			<h1>Components</h1>
-			
+
 			<article>
 				<h1>Javascript</h1>
 
@@ -152,7 +152,9 @@
 
 				<pre class="example language-markup">
 					<code>
-						<h3 id="target">Some Old HTML</h3>
+						<div id="target">
+							<p>Some Old HTML</p>
+						</div>
 					</code>
 				</pre>
 
@@ -160,9 +162,11 @@
 					<code>
 						// This is Javascript
 						var target = document.getElementById('target')
-						target.innerHTML = 'This was put here by Javascript!';
+						target.innerHTML = '<h3>This was put here by Javascript!</h3>';
 						target.addEventListener('click', function(){
-							alert('hello');
+							target.innerHTML += '<p>And this is a different size! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia illum sequi error molestias neque excepturi placeat impedit, explicabo velit! Ut explicabo, maiores illum provident, delectus minus debitis distinctio quos eius. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla velit quaerat similique aspernatur officiis a atque, aliquid, ad, harum alias molestiae amet cupiditate consequuntur officia iste rem. Fugit, necessitatibus, provident?</p>';
+							// You can also manually resize example frames.
+							Fett.resize();
 						});
 					</code>
 				</pre>
