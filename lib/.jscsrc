@@ -1,12 +1,12 @@
 {
-  "preset": "airbnb",
-  "safeContextKeyword": "context",
-  "validateIndentation": "\t",
-  "disallowSpacesInAnonymousFunctionExpression": {
-    "beforeOpeningRoundBrace": true,
-    "beforeOpeningCurlyBrace": true
-  },
-  "requireSpaceBeforeBlockStatements": null,
-  "requirePaddingNewLinesAfterBlocks": null,
-  "requirePaddingNewLinesBeforeLineComments": null
+	"preset": "airbnb",
+	"safeContextKeyword": "context",
+	"validateIndentation": "\t",
+	"disallowSpacesInAnonymousFunctionExpression": {
+		"beforeOpeningRoundBrace": true,
+		"beforeOpeningCurlyBrace": true
+	},
+	"requireSpaceBeforeBlockStatements": null,
+	"requirePaddingNewLinesAfterBlocks": null,
+	"requirePaddingNewLinesBeforeLineComments": null
 }
