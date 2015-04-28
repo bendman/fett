@@ -30,206 +30,161 @@
 				<img src="../../src/images/logo.svg" alt="Site Logo">
 			-->
 			<img src="lib/fett-helmet.svg" alt="Site Logo">
-
-			<p>This is an example styleguide using Fett, a lightweight styleguide renderer in Javascript. It also serves as the styleguide for <a href="http://benduncan.me">my digital resume</a>.  Theoretically your own logo would be here, but I'll throw the Fett logo on here as an example.</p>
+			<a href="https://github.com/bendman/fett"><img style="position: absolute; top: 10px; left: 0; border: 0; width: 149px; height: 149px;" src="http://aral.github.com/fork-me-on-github-retina-ribbons/left-turquoise@2x.png" alt="Fork me on GitHub"></a>
+			<p>This is an example styleguide and component documentation using <a href="https://github.com/bendman/fett">Fett</a>, a lightweight pattern renderer in Javascript.  Theoretically your own logo would be here, but I'll throw the Fett logo on here as an example.</p>
 		</aside>
-
-		<section>
-			<h1>Styles</h1>
-
-			<article>
-				<h1>Color</h1>
-
-				<p>These are the primary accent colors, following a monochromatic color scheme for simplicity.</p>
-
-				<div>
-					<figure class="swatch">
-						<figcaption>
-							<em>Dark Blue</em>
-							<code class="color">#152732</code>
-						</figcaption>
-					</figure>
-					<figure class="swatch">
-						<figcaption>
-							<em>Deep Blue</em>
-							<code class="color">#012345</code>
-						</figcaption>
-					</figure>
-					<figure class="swatch">
-						<figcaption>
-							<em>Jango Blue</em>
-							<code class="color">#315d72</code>
-						</figcaption>
-					</figure>
-					<figure class="swatch">
-						<figcaption>
-							<em>Sky Blue</em>
-							<code class="color">#66C9D5</code>
-						</figcaption>
-					</figure>
-					<figure class="swatch">
-						<figcaption>
-							<em>Powder Blue</em>
-							<code class="color">#d0eff7</code>
-						</figcaption>
-					</figure>
-				</div>
-
-				<p>Neutrals like these can be used for most body copy, as they are more readable but draw less attention than accent colors above.  A bit more contrast for fonts is okay, such as solid white or black, if they are not on their opposite colors.</p>
-
-				<div>
-					<figure class="swatch">
-						<figcaption>
-							<em>Base</em>
-							<code class="color">#F0F0F0</code>
-						</figcaption>
-					</figure>
-					<figure class="swatch">
-						<figcaption>
-							<em>Medium Gray</em>
-							<code class="color">#DDDDDD</code>
-						</figcaption>
-					</figure>
-					<figure class="swatch">
-						<figcaption>
-							<em>Dark Gray</em>
-							<code class="color">#222222</code>
-						</figcaption>
-					</figure>
-				</div>
-			</article>
-
-			<article class="alternate">
-				<h1>Typography</h1>
-
-				<p>The typeface used is Helvetica Neue.</p>
-
-				<pre class="example language-markup canvas-bg">
-					<code>
-						<h1>h1. Main Title</h1>
-						<h2>h2. Sub Title</h2>
-						<h3>h3. Section Title</h3>
-						<h4>h4. Content Title</h4>
-						<h5>h5. Content Subtitle</h5>
-
-						<p>Body text lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque iusto placeat voluptatum nemo, porro ab ut voluptate eos! Obcaecati quam unde optio fuga non quas eligendi officiis id voluptatem fugit.</p>
-					</code>
-				</pre>
-			</article>
-
-			<article>
-				<h1>Hidden</h1>
-
-				<p>Example Code Test</p>
-
-				<pre class="example language-markup hidden">
-					<code>
-						<h4>Example 1</h4>
-						<h4>Example 2</h4>
-						<h4>Example 3</h4>
-						<h4>Example 4</h4>
-						<h4>Example 4</h4>
-					</code>
-				</pre>
-
-				<pre class="language-markup">
-					<code>
-						<h4>Example #</h4>
-					</code>
-				</pre>
-			</article>
-
-		</section>
-
 
 		<section>
 			<h1>Components</h1>
 
 			<article>
-				<h1>Javascript</h1>
+				<h1>Swatches</h1>
 
-				<p>Javascript examples can also be added.</p>
+				<p>Colors can be shown using swatches, which show the color itself, a name, and the code to generate it.</p>
 
-				<pre class="example language-markup">
+				<div>
+					<figure class="swatch">
+						<figcaption>
+							<em>Intense Rose</em>
+							<code class="color">#FF0080</code>
+						</figcaption>
+					</figure>
+				</div>
+
+				<pre class="language-markup">
 					<code>
-						<div id="target">
-							<p>Some Old HTML</p>
-						</div>
-					</code>
-				</pre>
-
-				<pre class="example language-javascript">
-					<code>
-						// This is Javascript
-						var target = document.getElementById('target');
-						target.innerHTML = '<h3>This was put here by Javascript!</h3>';
-						target.addEventListener('click', function(){
-							target.innerHTML += '<p>And this is a different size! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia illum sequi error molestias neque excepturi placeat impedit, explicabo velit! Ut explicabo, maiores illum provident, delectus minus debitis distinctio quos eius. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla velit quaerat similique aspernatur officiis a atque, aliquid, ad, harum alias molestiae amet cupiditate consequuntur officia iste rem. Fugit, necessitatibus, provident?</p>';
-							// You can also manually resize example frames.
-							Fett.resize();
-						});
-					</code>
-				</pre>
-			</article>
-
-			<article class="alternate">
-				<h1>Skills</h1>
-
-				<pre class="example language-markup">
-					<code>
-						<div class="skills">
-							<section class="skills-tree">
-								<div>
-									<h4>Group Title</h4>
-									<dl>
-										<dt>Subgroup</dt>
-										<dd>Skill Item</dd>
-										<dd>Another Item</dd>
-									</dl>
-								</div>
-								<div>
-									<h4>Group Title</h4>
-									<dl>
-										<dt>Another Subgroup</dt>
-										<dd>With Skills</dd>
-										<dt>Subgroup</dt>
-										<dd>Skill Item</dd>
-									</dl>
-								</div>
-								<div>
-									<h4>Group Title</h4>
-									<dl>
-										<dt>Subgroup</dt>
-										<dd>Skill Item</dd>
-									</dl>
-								</div>
-							</section>
-						</div>
+							<figure class="swatch">
+								<figcaption>
+									<em>Intense Rose</em>
+									<code class="color">#FF0080</code>
+								</figcaption>
+							</figure>
 					</code>
 				</pre>
 			</article>
 
 			<article>
-				<h1>Project</h1>
+				<h1>Code Blocks</h1>
 
-				<pre class="example language-markup canvas-bg">
+				<p>Example code can be given in code blocks for HTML or JS. These blocks are automatically syntax highlighted depending on the language defined with the <code>language-markup</code> or <code>language-javascript</code> classes.</p>
+
+				<pre class="language-markup">
 					<code>
-						<div class="experience"> <!-- section wrapper -->
-							<section class="project-group">
-								<header>
-									<h4>Company</h4>
-									<span class="period">Mon YYYY - Mon YYYY</span>
-									<span class="job-title">Job Title</span>
-								</header>
-								<article class="project">
-									<h5>Project Title</h5>
-									<p>Summary of project responsibilities. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste iusto aspernatur odio sint asperiores. Nostrum ad dignissimos aliquid facilis, voluptas eveniet hic rem dolorum magnam, et, quos eum laborum.</p>
-								</article>
-							</section>
-						</div>
+<pre class="language-markup"><!-- or "language-javascript" -->
+	<code>
+		<p>This is an example of an HTML code example!</p>
+	</code>
+</pre>
 					</code>
 				</pre>
 
+				<pre class="language-javascript">
+					<code>
+						// Different languages are highlighted differently
+						document.write('and here is javascript');
+					</code>
+				</pre>
+			</article>
+
+			<article class="alternate">
+				<h1>Examples</h1>
+
+				<p>Code blocks can also be used to generate previews isolated in iframes by adding the <code>example</code> class.</p>
+
+				<pre class="language-markup example">
+					<code>
+						<h2 id="click_me">Click Here</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque non sit impedit quam eligendi, placeat ab animi, autem illum corrupti nulla ex fugiat consequatur sed ipsa ratione mollitia a odit.</p>
+					</code>
+				</pre>
+
+				<pre class="language-javascript example">
+					<code>
+						var times = 0;
+						document
+							.getElementById('click_me')
+							.addEventListener('click', function(){
+								this.innerHTML = ['Clicked', ++times, 'times'].join(' ');
+							});
+					</code>
+				</pre>
+
+				<p>This was created using the following code:</p>
+
+				<pre class="language-markup">
+					<code>
+<pre class="language-markup example">
+
+	<code>
+		<h2 id="click_me">Click Here</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque non sit impedit quam eligendi, placeat ab animi, autem illum corrupti nulla ex fugiat consequatur sed ipsa ratione mollitia a odit.</p>
+	</code>
+</pre>
+
+<pre class="language-javascript example">
+
+	<code>
+		var times = 0;
+		document
+			.getElementById('click_me')
+			.addEventListener('click', function(){
+				this.innerHTML = ['Clicked', ++times, 'times'].join(' ');
+			});
+	</code>
+</pre>
+					</code>
+				</pre>
+
+				<article>
+					<h1>Hidden Code</h1>
+
+					<p>Sometimes you want to display an example, but you don't want to display code, or you want to display different code. To do this, just add the <code>hidden</code> class to an example.</p>
+
+					<pre class="language-markup example hidden">
+						<code>
+							<h2 id="click_me">Click here.</h2>
+							<p>This HTML is shown in the example, but the source isn't rendered below. This can be useful when code requires some shimming to work properly in the context of the styleguide, or when some of the setup required to run code is irrelevant to the documentation.</p>
+						</code>
+					</pre>
+
+					<pre class="language-javascript example">
+						<code>
+	var times = 0;
+	document
+		.getElementById('click_me')
+		.addEventListener('click', function(){
+			this.innerHTML = ['Clicked', ++times, 'times'].join(' ');
+		});
+						</code>
+					</pre>
+				</article>
+
+				<article>
+					<h1>Resizing</h1>
+
+					<p>The example "canvas" tries to resize correctly for any content. Sometimes this can go awry, particularly when Javascript is involved which might add more content. You can update the size of an example from within the example's Javascript using the command <code>Fett.resize();</code>.</p>
+
+					<pre class="example language-markup hidden">
+						<code>
+							<div id="target">
+								<h3>Click Here</h3>
+							</div>
+						</code>
+					</pre>
+
+					<pre class="example language-javascript">
+						<code>
+							var times = 0;
+							document.getElementById('target').addEventListener('click', function(){
+								if (++times % 3) this.innerHTML += '<p>And this is a different size! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia illum sequi error molestias neque excepturi placeat impedit, explicabo velit! Ut explicabo, maiores illum provident, delectus minus debitis distinctio quos eius. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla velit quaerat similique aspernatur officiis a atque, aliquid, ad, harum alias molestiae amet cupiditate consequuntur officia iste rem. Fugit, necessitatibus, provident?</p>';
+								else this.innerHTML = '<h3>Click Here</h3>';
+								// Manually resize example frame here:
+								Fett.resize();
+							});
+						</code>
+					</pre>
+
+				</article>
 			</article>
 
 		</section>

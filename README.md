@@ -1,4 +1,4 @@
-<img src="http://benduncan.me/experiments/fett/fett-helmet.svg" alt="Fett Logo" width="300">
+<img src="http://benduncan.me/experiments/fett/lib/fett-helmet.svg" alt="Fett Logo" width="300">
 # Fett
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/bendman/fett?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -33,10 +33,9 @@ Fett itself is a website, ideally served in parallel to your own site. If you us
 The styleguide previews work by injecting each example HTML code block onto an iframe _canvas_ which simulates your site. This provides an isolated preview to render your code into.
 
 The canvas consists of two files:
-`canvas.html`
+- `canvas/frame.html`
 The base iframe file into which each code block gets injected.  Edit this file to include your site's CSS, preferrably by relative URL.
-
-`css/canvas-extension.css`
+- `canvas/style-extension.css`
 A Fett-specific CSS file which is also loaded on the canvas.  You can use this file to alter how your examples appear within Fett.
 
 ### 3. Build your Styleguide!
@@ -44,8 +43,12 @@ A Fett-specific CSS file which is also loaded on the canvas.  You can use this f
 A Fett styleguide is written in HTML 5 to be easily editable by everybody who might use it.  The styleguide file itself is `index.html`.
 
 There are a few structures within the styleguide that are useful to know:
-`main > section`
+- `main > section`
 These sections are the top level navigation.
+- `article`
+Contained within the sections, these are where your code examples go.
+
+For details about how to show syntax highlighted code examples, swatches, or previews, look at the [Fett documentation](http://benduncan.me/experiments/fett/).
 
 
 ## License
