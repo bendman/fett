@@ -1,4 +1,4 @@
-;(function(window, Prism, html_beautify, undefined){
+;(function(window, Prism, htmlBeautify, jsBeautify, undefined){
 	'use strict';
 
 	var document = window.document;
@@ -8,7 +8,6 @@
 	function runFett() {
 		var codeBlocks = document.getElementsByTagName('code');
 		codeBlocks = excludeExampleCode(codeBlocks);
-
 
 		// Example generation for `.example` code blocks
 		var exampleCode = Array.prototype.filter.call(codeBlocks, isExample);
@@ -29,9 +28,9 @@
 		buildNavigation();
 	}
 
-	// 
+	//
 	// # Events
-	// 
+	//
 
 	function bindEvents() {
 		// custom debounced resize event
@@ -43,10 +42,10 @@
 		window.dispatchEvent(event);
 	}
 
-	// 
+	//
 	// # Color Swatches
 	//
-	
+
 	function renderColorSwatches(swatchNode) {
 		// Create the color preview element
 		var colorPreview = document.createElement('div');
@@ -59,12 +58,12 @@
 		swatchNode.insertBefore(colorPreview, swatchNode.firstChild);
 	}
 
-	// 
+	//
 	// # Example Iframes
-	// 
+	//
 	var frameExamples = [];
 
-	// Handle 
+	// Handle
 	function renderExample(codeEl) {
 		var wrapper = closest(isNavSection, codeEl);
 		var exampleIndex = indexByProp(frameExamples, 'wrapper', wrapper);
@@ -80,7 +79,7 @@
 			iframe.setAttribute('src', 'canvas.html');
 			iframe.style.height = '0px';
 			frameWrapper.appendChild(iframe);
-			
+
 			// Add a new example and update the index
 			exampleIndex = frameExamples.length;
 			frameExamples.push({
@@ -129,7 +128,7 @@
 		example.sources.forEach(function(source){
 			sourceHandlers[source.language](example, source.content);
 		});
-	
+
 		// Set content height to auto, so the example will stretch.
 		example.nodeBody.style.height = 'auto';
 		example.nodeBody.parentElement.style.height = 'auto';
@@ -143,17 +142,18 @@
 		function resize() {
 			// Reset frame height for measuring.
 			example.node.style.height = 'auto';
+
 			// Set the iframe height to match body content.
 			example.node.style.height = contentWindow.document.body.scrollHeight + 'px';
 		}
 	};
 
 	var sourceHandlers = {
-		markup: function(example, source) {
+		markup: function(example, source){
 			// Add markup to an example
 			example.nodeBody.innerHTML += source;
 		},
-		javascript: function(example, source) {
+		javascript: function(example, source){
 			// Add javascript to an example
 			var script = example.node.contentWindow.document.createElement('script');
 			script.innerHTML = source;
@@ -161,9 +161,9 @@
 		}
 	};
 
-	// 
+	//
 	// # Code Handling
-	// 
+	//
 
 	function presentCode(codeEl) {
 		// Remove exterior indentation (from `pre` tag)
@@ -175,9 +175,9 @@
 		// `html_beautify` indents content, while assigning to textContent
 		// sanatizes HTML to entities in a text node for presentation.
 		if (codeEl.parentNode.classList.contains('language-markup')) {
-			codeEl.textContent = html_beautify(codeEl.innerHTML).trim();
+			codeEl.textContent = htmlBeautify(codeEl.innerHTML).trim();
 		} else if (codeEl.parentNode.classList.contains('language-javascript')) {
-			codeEl.textContent = js_beautify(codeEl.innerHTML).trim();
+			codeEl.textContent = jsBeautify(codeEl.innerHTML).trim();
 		}
 
 		// Highlight each element
@@ -191,9 +191,9 @@
 		}
 	}
 
-	// 
+	//
 	// # Navigation
-	// 
+	//
 
 	function buildNavigation() {
 
@@ -235,7 +235,7 @@
 	}
 
 	// Attach parent properties to each nav section.
-	function attachNavParent(navList) {		
+	function attachNavParent(navList) {
 		// Store an array of the registered navigable sections to search later.
 		var sections = navList.map(function(obj){
 			return obj.section;
@@ -287,11 +287,9 @@
 		navEl.appendChild(ulEl);
 	}
 
-
-	// 
+	//
 	// # Utlities
 	//
-	
 
 	// Generate a valid ID from a string of text.
 	function idFromText(text) {
@@ -302,7 +300,7 @@
 
 		return words.join('_');
 	}
-	
+
 	// Check if a node is a navigation delimiting section.
 	function isNavSection(node) {
 		return isTag('section', node) || isTag('article', node);
@@ -379,6 +377,5 @@
 			timeout = window.setTimeout(futureCall, wait);
 		};
 	}
-
-
-}(window, Prism, html_beautify));
+// jscs:disable
+}(window, Prism, html_beautify, js_beautify));
