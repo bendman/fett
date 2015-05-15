@@ -176,8 +176,12 @@
 						<code>
 							var times = 0;
 							document.getElementById('target').addEventListener('click', function(){
-								if (++times % 3) this.innerHTML += '<p>And this is a different size! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia illum sequi error molestias neque excepturi placeat impedit, explicabo velit! Ut explicabo, maiores illum provident, delectus minus debitis distinctio quos eius. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla velit quaerat similique aspernatur officiis a atque, aliquid, ad, harum alias molestiae amet cupiditate consequuntur officia iste rem. Fugit, necessitatibus, provident?</p>';
-								else this.innerHTML = '<h3>Click Here</h3>';
+								if (++times <= 3) {
+									this.innerHTML += '<p>And this is a different size! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia illum sequi error molestias neque excepturi placeat impedit, explicabo velit! Ut explicabo, maiores illum provident, delectus minus debitis distinctio quos eius. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla velit quaerat similique aspernatur officiis a atque, aliquid, ad, harum alias molestiae amet cupiditate consequuntur officia iste rem. Fugit, necessitatibus, provident?</p>';
+								} else {
+									times = 0;
+									this.innerHTML = '<h3>Click Here</h3>';
+								}
 								// Manually resize example frame here:
 								Fett.resize();
 							});
